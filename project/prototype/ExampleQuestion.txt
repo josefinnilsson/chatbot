@@ -1,0 +1,1 @@
+{"question":"Detta är en fråga?","answers":["Är detta ett svar?","Är detta också ett svar?"],"category":"test & exempel","url":"https://github.com/josefinnilsson/chatbot"}
