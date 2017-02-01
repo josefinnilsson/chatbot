@@ -21,7 +21,7 @@ public class Prototype{
 
 
 /**
-* Isolates separate Json elements and collects the in a collection
+* Isolates separate Json elements and collects them in a collection
 *
 * @param      inData String in json format
 * @return            Collection of separate strings which all are single json elements
@@ -38,6 +38,8 @@ public class Prototype{
 * @return      jsonElem
 */
 //TODO Metod som hårdmatchar frågor
+public String hardMatch(String question, String[] jsonList){
+}
 
 
 
