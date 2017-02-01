@@ -1,5 +1,16 @@
+import org.json.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+import java.lang.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
 public class Prototype{
   public void go(){
+  	System.out.println(readFromFile());
     System.out.println("hello MVK");
   }
 
@@ -17,8 +28,19 @@ public class Prototype{
 * @return      The next X TODO lines of the txt doc
 */
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
-
-
+	public String readFromFile(){
+		StringBuilder sb = new StringBuilder();
+		String fileName = "ExampleQuestion.txt";
+		int limit = 30;
+		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
+			for (int i = 0; i < limit; i++) {
+				sb.append(br.readLine());
+			}
+		}catch(IOException e){
+			System.out.println("hoi");
+		}
+		return sb.toString();
+	}
 
 /**
 * Isolates separate Json elements and collects them in a collection
@@ -50,6 +72,20 @@ public String hardMatch(String question, String[] jsonList){
 * @return     answer
 */
 //TODO Metod som plockar ut första svaret
-
+	public String getAnswer(JSONObject elem) {
+		JSONArray arr = elem.getJSONArray("answers");
+		return arr.getString(0);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
