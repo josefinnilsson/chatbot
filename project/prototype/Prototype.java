@@ -1,3 +1,5 @@
+import org.json.*;
+
 public class Prototype{
   public void go(){
     System.out.println("hello MVK");
@@ -48,6 +50,20 @@ public class Prototype{
 * @return     answer
 */
 //TODO Metod som plockar ut första svaret
-
+	public String getAnswer(JSONObject elem) {
+		JSONArray arr = elem.getJSONArray("answers");
+		return arr.getString(0);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
