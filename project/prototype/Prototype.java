@@ -18,7 +18,7 @@ BufferedReader br;
 
   public void input(){
         Scanner terminalInput = new Scanner(System.in);
-    System.out.println("Hello! I am Dolores. Please ask me something");
+    System.out.println("Hej! Det är jag som är Dolores, fråga mig något.");
     while(true){
       try{
         br = new BufferedReader(new FileReader(fileName));
