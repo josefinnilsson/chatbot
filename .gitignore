@@ -5,4 +5,6 @@ target
 /.classpath
 /.project
 /.settings
+/project/prototype/*.class
+/project/prototype/workingImplementation.jar
 /RUNNING_PID
