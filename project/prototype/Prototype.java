@@ -60,7 +60,11 @@ public class Prototype{
 * @return      jsonElem
 */
 //TODO Metod som hårdmatchar frågor
-public String hardMatch(String question, String[] jsonList){
+public JSONObject hardMatch(String question, JSONObject[] jsonList){
+  for(JSONObject jsonElem : jsonList){
+    if(jsonElem.getString("question").equals(question)) return jsonElem;
+  }
+  return null;
 }
 
 
@@ -78,14 +82,3 @@ public String hardMatch(String question, String[] jsonList){
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
