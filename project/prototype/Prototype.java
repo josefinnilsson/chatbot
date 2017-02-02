@@ -6,7 +6,8 @@ import java.util.stream.Stream;
 import java.lang.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Prototype{
   public void go(){
@@ -30,7 +31,7 @@ public class Prototype{
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
 	public String readFromFile(){
 		StringBuilder sb = new StringBuilder();
-		String fileName = "ExampleQuestion.txt";
+		String fileName = "qa-unique.txt";
 		int limit = 30;
 		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
 			for (int i = 0; i < limit; i++) {
@@ -60,9 +61,19 @@ public class Prototype{
 * @return      jsonElem
 */
 //TODO Metod som hårdmatchar frågor
-public JSONObject hardMatch(String question, JSONObject[] jsonList){
+public JSONObject questionMatcher(String question, JSONObject[] jsonList){
+  String[] words = question.split(" ");
+  StringBuilder buildRegex = new StringBuilder();
+  buildRegex.append(".+?");
+  for(int i = 0 ; i < words.length ; i++){
+    buildRegex.append(words[i]);
+    if(i<(words.length-1))
+      buildRegex.append(".+?");
+  }
+  Pattern questionPattern = Pattern.compile(buildRegex.toString());
   for(JSONObject jsonElem : jsonList){
-    if(jsonElem.getString("question").equals(question)) return jsonElem;
+    Matcher matcher = questionPattern.matcher(jsonElem.getString("question"));
+    if(matcher.find()) return jsonElem;
   }
   return null;
 }
