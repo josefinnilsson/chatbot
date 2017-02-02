@@ -54,14 +54,6 @@ BufferedReader br;
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
 	public String readFromFile(){
     try{
-      /*
-      if(lineIndex != 0){
-  			for (int i = 0;i<lineIndex ;i++ ) {
-  				br.readLine();
-  			}
-  		}
-  		lineIndex++;
-      */
   		return br.readLine();
     }catch(IOException e){
       System.out.println("Something went wrong");
