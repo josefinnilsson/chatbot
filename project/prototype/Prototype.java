@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.Scanner;
+
 
 public class Prototype{
   public void input(){
@@ -15,7 +17,12 @@ public class Prototype{
     System.out.println("Hello! I am Dolores. Please ask me something");
     System.out.print(">");
     //get user input
-    String question = scanner.nextLine();
+    String question = terminalInput.nextLine();
+    JSONObject result = questionMatcher(question,stringToJSON(readFromFile()));
+    if(result != null)
+      System.out.println(getAnswer(result));
+    else
+      System.out.println("Somehow you are not fit for the family life.");
   }
 
 /**
