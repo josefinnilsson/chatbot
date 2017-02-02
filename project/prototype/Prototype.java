@@ -26,14 +26,16 @@ BufferedReader br;
 
     Scanner terminalInput = new Scanner(System.in);
     System.out.println("Hello! I am Dolores. Please ask me something");
-    System.out.print(">");
-    //get user input
-    String question = terminalInput.nextLine();
-    JSONObject result = questionMatcher(question,stringToJSON());
-    if(result != null)
-      System.out.println(getAnswer(result));
-    else
-      System.out.println("Somehow you are not fit for the family life.");
+    while(true){
+      System.out.print(">");
+      //get user input
+      String question = terminalInput.nextLine();
+      JSONObject result = questionMatcher(question,stringToJSON());
+      if(result != null)
+        System.out.println(getAnswer(result));
+      else
+        System.out.println("Somehow you are not fit for the family life.");
+    }
   }
 
 /**
@@ -73,7 +75,7 @@ BufferedReader br;
 */
 //TODO Metod som isolerar json elementen och lägger i samling
 public JSONObject[] stringToJSON(){
-  int size = 50;
+  int size = 100;
   JSONObject[] jsons = new JSONObject[size];
   for(int i = 0 ; i < size ; i++){
     jsons[i] = new JSONObject(readFromFile());
@@ -97,11 +99,16 @@ public JSONObject questionMatcher(String question, JSONObject[] jsonList){
   for(int i = 0 ; i < words.length ; i++){
     buildRegex.append(words[i]);
     if(i<(words.length-1))
-      buildRegex.append(".+?");
+      buildRegex.append("\\s.*?");
+    else
+      buildRegex.append(".*");
+
   }
-  Pattern questionPattern = Pattern.compile(buildRegex.toString());
+  String reg = buildRegex.toString();
+  System.out.println(reg);
+  Pattern questionPattern = Pattern.compile(reg);
   for(JSONObject jsonElem : jsonList){
-    Matcher matcher = questionPattern.matcher(jsonElem.getString("question"));
+    Matcher matcher = questionPattern.matcher(jsonElem.getString("question").toLowerCase());
     if(matcher.find()) return jsonElem;
   }
   return null;
