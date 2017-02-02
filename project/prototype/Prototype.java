@@ -30,8 +30,10 @@ BufferedReader br;
       String question = terminalInput.nextLine();
       JSONObject result;
       do{
+        System.out.print(".");
         result = questionMatcher(question,stringToJSON());
       }while(result == null);
+      System.out.println();
       System.out.println(getAnswer(result));
     }
   }
@@ -105,9 +107,7 @@ public JSONObject questionMatcher(String question, JSONObject[] jsonList){
       buildRegex.append(".*");
 
   }
-  String reg = buildRegex.toString();
-  System.out.println(reg);
-  Pattern questionPattern = Pattern.compile(reg);
+  Pattern questionPattern = Pattern.compile(buildRegex.toString());
   for(JSONObject jsonElem : jsonList){
     Matcher matcher = questionPattern.matcher(jsonElem.getString("question").toLowerCase());
     if(matcher.find()) return jsonElem;
