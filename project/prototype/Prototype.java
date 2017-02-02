@@ -18,6 +18,12 @@ String fileName = "qa-unique.txt";
 int limit = 30;
 BufferedReader br;
   public void input(){
+    try{
+      br = new BufferedReader(new FileReader(fileName));
+    } catch(IOException e){
+      System.out.println("File not found");
+    }
+
     Scanner terminalInput = new Scanner(System.in);
     System.out.println("Hello! I am Dolores. Please ask me something");
     System.out.print(">");
@@ -44,16 +50,19 @@ BufferedReader br;
 * @return      The next X TODO lines of the txt doc
 */
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
-	public String readFromFile() throws IOException{
-
-		br = new BufferedReader(new FileReader(fileName));
-		if(lineIndex != 0){
-			for (int i = 0;i<lineIndex ;i++ ) {
-				br.readLine();
-			}
-		}
-		lineIndex++;
-		return br.readLine();
+	public String readFromFile(){
+    try{
+  		if(lineIndex != 0){
+  			for (int i = 0;i<lineIndex ;i++ ) {
+  				br.readLine();
+  			}
+  		}
+  		lineIndex++;
+  		return br.readLine();
+    }catch(IOException e){
+      System.out.println("Something went wrong");
+      return null;
+    }
 	}
 
 /**
@@ -64,7 +73,12 @@ BufferedReader br;
 */
 //TODO Metod som isolerar json elementen och lägger i samling
 public JSONObject[] stringToJSON(){
-  return null;
+  int size = 50;
+  JSONObject[] jsons = new JSONObject[size];
+  for(int i = 0 ; i < size ; i++){
+    jsons[i] = new JSONObject(readFromFile());
+  }
+  return jsons;
 }
 
 
