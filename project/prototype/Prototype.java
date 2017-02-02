@@ -12,9 +12,12 @@ import java.util.regex.Matcher;
 public class Prototype{
 
 	int lineIndex = 0;
+	StringBuilder sb = new StringBuilder();
+	String fileName = "qa-unique.txt";
+	int limit = 30;
+	BufferedReader br;
 
   public void go(){
-  	System.out.println(readFromFile());
     System.out.println("hello MVK");
   }
 
@@ -32,25 +35,16 @@ public class Prototype{
 * @return      The next X TODO lines of the txt doc
 */
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
-	public String readFromFile(){
-		StringBuilder sb = new StringBuilder();
-		String fileName = "qa-unique.txt";
-		int limit = 30;
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-			if(lineIndex != 0){
-				for (int i = 0;i<lineIndex ;i++ ) {
-					br.readLine();
-				}
+	public String readFromFile() throws IOException{
+		
+		br = new BufferedReader(new FileReader(fileName));
+		if(lineIndex != 0){
+			for (int i = 0;i<lineIndex ;i++ ) {
+				br.readLine();
 			}
-			for (int j = 0; j < limit; j++) {
-				sb.append(br.readLine());
-				lineIndex++;
-			}
-		}catch(IOException e){
-			System.out.println("File not found");
 		}
-		lineIndex--;
-		return sb.toString();
+		lineIndex++;	
+		return br.readLine();
 	}
 
 /**
