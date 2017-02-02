@@ -12,29 +12,27 @@ import java.util.Scanner;
 
 
 public class Prototype{
-int lineIndex = 0;
-StringBuilder sb = new StringBuilder();
-String fileName = "qa-unique.txt";
-int limit = 30;
-BufferedReader br;
-  public void input(){
-    try{
-      br = new BufferedReader(new FileReader(fileName));
-    } catch(IOException e){
-      System.out.println("File not found");
-    }
 
-    Scanner terminalInput = new Scanner(System.in);
+String fileName = "qa-unique.txt";
+BufferedReader br;
+
+  public void input(){
+        Scanner terminalInput = new Scanner(System.in);
     System.out.println("Hello! I am Dolores. Please ask me something");
     while(true){
+      try{
+        br = new BufferedReader(new FileReader(fileName));
+      } catch(IOException e){
+        System.out.println("File not found");
+      }
       System.out.print(">");
       //get user input
       String question = terminalInput.nextLine();
-      JSONObject result = questionMatcher(question,stringToJSON());
-      if(result != null)
-        System.out.println(getAnswer(result));
-      else
-        System.out.println("Somehow you are not fit for the family life.");
+      JSONObject result;
+      do{
+        result = questionMatcher(question,stringToJSON());
+      }while(result == null);
+      System.out.println(getAnswer(result));
     }
   }
 
@@ -54,12 +52,14 @@ BufferedReader br;
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
 	public String readFromFile(){
     try{
-  		if(lineIndex != 0){
+      /*
+      if(lineIndex != 0){
   			for (int i = 0;i<lineIndex ;i++ ) {
   				br.readLine();
   			}
   		}
   		lineIndex++;
+      */
   		return br.readLine();
     }catch(IOException e){
       System.out.println("Something went wrong");
