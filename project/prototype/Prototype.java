@@ -12,13 +12,18 @@ import java.util.Scanner;
 
 
 public class Prototype{
+int lineIndex = 0;
+StringBuilder sb = new StringBuilder();
+String fileName = "qa-unique.txt";
+int limit = 30;
+BufferedReader br;
   public void input(){
     Scanner terminalInput = new Scanner(System.in);
     System.out.println("Hello! I am Dolores. Please ask me something");
     System.out.print(">");
     //get user input
     String question = terminalInput.nextLine();
-    JSONObject result = questionMatcher(question,stringToJSON(readFromFile()));
+    JSONObject result = questionMatcher(question,stringToJSON());
     if(result != null)
       System.out.println(getAnswer(result));
     else
@@ -26,7 +31,7 @@ public class Prototype{
   }
 
 /**
-* Description of method
+* Description of metho1
 *
 * @param  parameter1 Description of parameter1
 * @param  parameter2 Description of parameter2
@@ -39,18 +44,16 @@ public class Prototype{
 * @return      The next X TODO lines of the txt doc
 */
 //TODO Metod som läser in från txt doc lite i taget allt eftersom man ber om det.
-	public String readFromFile(){
-		StringBuilder sb = new StringBuilder();
-		String fileName = "qa-unique.txt";
-		int limit = 30;
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-			for (int i = 0; i < limit; i++) {
-				sb.append(br.readLine());
+	public String readFromFile() throws IOException{
+
+		br = new BufferedReader(new FileReader(fileName));
+		if(lineIndex != 0){
+			for (int i = 0;i<lineIndex ;i++ ) {
+				br.readLine();
 			}
-		}catch(IOException e){
-			System.out.println("hoi");
 		}
-		return sb.toString();
+		lineIndex++;
+		return br.readLine();
 	}
 
 /**
@@ -60,7 +63,9 @@ public class Prototype{
 * @return            Collection of separate strings which all are single json elements
 */
 //TODO Metod som isolerar json elementen och lägger i samling
-
+public JSONObject[] stringToJSON(){
+  return null;
+}
 
 
 /**
