@@ -93,7 +93,8 @@ public JSONObject[] stringToJSON(){
 */
 //TODO Metod som hårdmatchar frågor
 public JSONObject questionMatcher(String question, JSONObject[] jsonList){
-  String[] words = question.split(" ");
+  question = question.replaceAll("[^a-zA-Z0-9\\s]", "");
+  String[] words = question.toLowerCase().split(" ");
   StringBuilder buildRegex = new StringBuilder();
   buildRegex.append(".*?");
   for(int i = 0 ; i < words.length ; i++){
