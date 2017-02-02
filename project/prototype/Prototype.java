@@ -10,9 +10,12 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Prototype{
-  public void go(){
-  	System.out.println(readFromFile());
-    System.out.println("hello MVK");
+  public void input(){
+    Scanner terminalInput = new Scanner(System.in);
+    System.out.println("Hello! I am Dolores. Please ask me something");
+    System.out.print(">");
+    //get user input
+    String question = scanner.nextLine();
   }
 
 /**
@@ -64,7 +67,7 @@ public class Prototype{
 public JSONObject questionMatcher(String question, JSONObject[] jsonList){
   String[] words = question.split(" ");
   StringBuilder buildRegex = new StringBuilder();
-  buildRegex.append(".+?");
+  buildRegex.append(".*?");
   for(int i = 0 ; i < words.length ; i++){
     buildRegex.append(words[i]);
     if(i<(words.length-1))
