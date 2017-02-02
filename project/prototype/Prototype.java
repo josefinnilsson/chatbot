@@ -9,13 +9,16 @@ import java.io.FileReader;
 
 
 public class Prototype{
+
+	int lineIndex = 0;
+
   public void go(){
   	System.out.println(readFromFile());
     System.out.println("hello MVK");
   }
 
 /**
-* Description of method
+* Description of metho1
 *
 * @param  parameter1 Description of parameter1
 * @param  parameter2 Description of parameter2
@@ -31,14 +34,21 @@ public class Prototype{
 	public String readFromFile(){
 		StringBuilder sb = new StringBuilder();
 		String fileName = "ExampleQuestion.txt";
-		int limit = 30;
+		int limit = 2;
 		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-			for (int i = 0; i < limit; i++) {
+			if(lineIndex != 0){
+				for (int i = 0;i<lineIndex ;i++ ) {
+					br.readLine();
+				}
+			}
+			for (int j = 0; j < limit; j++) {
 				sb.append(br.readLine());
+				lineIndex++;
 			}
 		}catch(IOException e){
-			System.out.println("hoi");
+			System.out.println("File not found");
 		}
+		lineIndex--;
 		return sb.toString();
 	}
 
