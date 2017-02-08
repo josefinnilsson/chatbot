@@ -1,20 +1,27 @@
 $background-color: rgb(250,250,250);
 $heading-color: rgb(169,180,198); 
 $primary-color: rgb(255,102,0); 
+$primary-color-light: rgb(255, 120, 30);
+$hover: rgb(247, 130, 51); 
 $heading-font: 'Abel', sans-serif; 
 
 h1 {
 	font-family: $heading-font; 
-	font-size: 4vw; 
+	font-size: 2.5em; 
 	text-align: center; 
 	color: $heading-color; 
 }
 
+
 body {
   background: $background-color;
   padding-top: 5em;
-  display: flex;
+  display: flex; 
   justify-content: center;
+  text-align: center; 
+  align-items: center; 
+  text-align: center; 
+  width:100%;
 }
 
 /* Type writing effects */
@@ -25,9 +32,10 @@ body {
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .1em; /* Adjust as needed */
   animation: 
-    typing 4s steps(40, end),
-    blink-caret 1s step-end infinite;
+  typing 4s steps(40, end),
+  blink-caret 1s step-end infinite;
 }
+
 
 /* The typing effect */
 @keyframes typing {
@@ -39,4 +47,58 @@ body {
 @keyframes blink-caret {
 	from, to { border-color: transparent }
 	50% { border-color: $primary-color; }
+}
+
+form {
+  padding-top: 5%; 
+  width: 100%;
+  display: inline-block;
+  input,
+  textarea {
+    border: 0.15em solid $primary-color;
+    width: 100%;
+    padding: 2%;
+    box-sizing: border-box;
+    font-size: 1em;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: $primary-color-light;
+  }
+  textarea {
+    height: 5em;
+    resize: none;
+  }
+  .submit {
+    border: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align: right;
+  }
+  input[type="submit"] {
+    background: $primary-color-light;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    width: 33%;
+    &:hover {
+      background: $hover;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 20px;
+    span {
+      display: block;
+      font-family: $heading-font; 
+      font-size: 1em; 
+      text-align: left; 
+      color: $heading-color; 
+    }
+  }
+  .message-form { 
+    margin: auto; 
+    max-width: 100%; 
+  }
 }
