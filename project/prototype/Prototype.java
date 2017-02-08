@@ -16,8 +16,13 @@ public class Prototype{
 String fileName = "qa-unique.txt";
 BufferedReader br;
 
+
   public void input(){
-        Scanner terminalInput = new Scanner(System.in);
+    
+    SessionSaver sessionSaver = new SessionSaver();
+    //set logRating to false if you dont want to rate Dolores Asnwers
+    //sessionSaver.logRating=false;
+    Scanner terminalInput = new Scanner(System.in);
     System.out.println("Hej! Det är jag som är Dolores, fråga mig något.");
     while(true){
       try{
@@ -26,15 +31,18 @@ BufferedReader br;
         System.out.println("File not found");
       }
       System.out.print(">");
-      //get user input
       String question = terminalInput.nextLine();
+      sessionSaver.logQuestion(question);
       JSONObject result;
       do{
         System.out.print(".");
         result = questionMatcher(question,stringToJSON());
       }while(result == null);
       System.out.println();
-      System.out.println(getAnswer(result));
+      String answer = getAnswer(result);
+      System.out.println(answer);
+      sessionSaver.logAnswer(answer);
+      sessionSaver.logRating();
     }
   }
 
