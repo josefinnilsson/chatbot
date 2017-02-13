@@ -51,7 +51,7 @@ public class SessionSaver {
 
     try {
       fout = new FileWriter(sessionFile, true);
-      fout.write("{\"Question\" : \"" + questionOut + "\" , \"Answer\" : \""+ answerOut + "\" , \"Rating:\" : " +ratingOut + " }\n") ;
+      fout.write("{\"Question\" : \"" + question + "\" , \"Answer\" : \""+ answer + "\" , \"Rating:\" : " +rating + " }\n") ;
       fout.flush();
       fout.close();
     }
