@@ -4,13 +4,15 @@
 # --- !Ups
 
 create table message (
-  id                            varchar(255) not null,
-  message                       varchar(255),
+  id                            integer not null,
+  name                          varchar(255),
   constraint pk_message primary key (id)
 );
+create sequence message_seq;
 
 
 # --- !Downs
 
 drop table if exists message;
+drop sequence if exists message_seq;
 

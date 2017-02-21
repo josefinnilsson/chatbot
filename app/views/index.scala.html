@@ -14,12 +14,16 @@
 		<h1>Hello, my name is Dolores</h1>
 	</div>
 	<div id = "form">
-		<form action="@routes.Application.addMessage()">
-		<input type="text" message="message"/>
-		<button>Send</button>
-		</form>
+		<form action="@routes.Application.addMessage()" method="post">
+		<label><span>Send Dolores a Message</span>
+			<textarea name="name"></textarea>
+			
+			<fieldset class="submit">
+							<input type="submit" value="Send">
+						</fieldset>
+			</form>
 	</div>
-	<div id = "message-form">
+	<!-- <div id = "message-form">
 
 		<form>
 
@@ -32,7 +36,7 @@
 
 					</form>
 
-				</div>
+				</div> -->
 
 			</body>
 

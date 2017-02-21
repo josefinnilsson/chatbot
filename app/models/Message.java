@@ -9,8 +9,13 @@ import play.data.validation.*;
 @Entity
 public class Message extends Model {
 	@Id
-	public String id; 
+	public Integer id; 
 
-	@Constraints.Required
-	public String message; 
+	public String name; 
+
+	public Message() {}
+
+	public Message(String name) {
+		this.name = name; 
+	}
 }
