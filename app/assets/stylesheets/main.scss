@@ -24,6 +24,17 @@ body {
   width:100%;
 }
 
+ul {
+  list-style-type: none; 
+}
+
+li {
+  text-align: left !important;
+  font-family: $heading-font; 
+  font-size: 1em; 
+  color: black; 
+}
+
 /* Type writing effects */
 .typewriter h1 {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -50,7 +61,7 @@ body {
 }
 
 form {
-  padding-top: 5%; 
+  padding-top: 0%; 
   width: 100%;
   display: inline-block;
   input,
