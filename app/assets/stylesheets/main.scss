@@ -37,6 +37,23 @@ li {
  color: black; 
 }
 
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center; 
+}
+
+small {
+  font: $body-font;
+  text-transform: uppercase; 
+  color: $heading-color; 
+}
+
+
 
 /* Type writing effects */
 .typewriter h1 {
