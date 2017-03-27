@@ -8,3 +8,5 @@ target
 /project/prototype/*.class
 /project/prototype/workingImplementation.jar
 /RUNNING_PID
+.DS_Store
+/app/.DS_Store
