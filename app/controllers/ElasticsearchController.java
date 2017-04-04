@@ -32,7 +32,7 @@ public class ElasticsearchController extends Controller {
     //Get queryResult as string from ES-Model
     String queryResult = esModel.getAnswer(queryString);
     //Set return-message text to query result
-    message.setMessage(queryResult
+    message.setMessage(queryResult);
     //Save return-message for view
     message.save();
   }

@@ -26,6 +26,7 @@ public class Application extends Controller {
 		Form<Message> messageForm = formFactory.form(Message.class);
 		Message message = messageForm.bindFromRequest().get();
 		message.save();
+		//Ultimately queries ES
 		esController.Query(message);
 		return redirect(routes.Application.index());
 	}
