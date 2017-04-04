@@ -16,5 +16,6 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "org.elasticsearch" % "elasticsearch" % "5.3.0"
+libraryDependencies += "org.elasticsearch.client" % "transport" % "5.0.0"
 
 fork in run := true
