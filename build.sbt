@@ -15,5 +15,6 @@ libraryDependencies ++= Seq(
   evolutions
 )
 
+libraryDependencies += "org.elasticsearch" % "elasticsearch" % "0.20.5"
 
 fork in run := true

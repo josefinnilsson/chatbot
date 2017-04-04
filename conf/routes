@@ -10,7 +10,9 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET 	/messages  	controllers.Application.getMessages
 
+#IS THIS OK?
 POST	/addMessage controllers.Application.addMessage
+
 
 
 
