@@ -20,7 +20,7 @@ public class EsModel extends Model{
     }
 
     /*
-    Returns the answers from an ES query
+    Return the answers from an ES query
     @return all answers from ES
     */
     public String getAllAnswers(){
