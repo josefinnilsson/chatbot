@@ -11,7 +11,7 @@ public class EsModel extends Model{
     }
 
     /*
-    Sends a query to ES
+    Sends a query to ES and returns the entire response
     @param The query you want to ask ES
     @return the search responnse from ES
     */
