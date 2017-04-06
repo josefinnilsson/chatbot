@@ -22,42 +22,54 @@ import java.net.*;
 import java.io.*;
 public class EsModel{
 
+    TransportClient client;
+
+
+
+    public EsModel() throws UnknownHostException{
+      client = new PreBuiltTransportClient(Settings.EMPTY)
+        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+    }
+
+
+
+    public SearchResponse getStringQuery(String query){
+      SearchResponse response = client.prepareSearch("familjelivdb")
+        .setQuery(QueryBuilders.matchQuery("question",query))
+        .setFrom(0).setSize(60).setExplain(true)
+        .get();
+      return response;
+    }
+
+
+    public ArrayList<String> getAllAnswers(SearchHit hit){
+      return (ArrayList<String>)hit.sourceAsMap().get("answers");
+    }
 
     /*
     This model talks to elasticsearch
     */
-    public EsModel(){
-    //TODO
 
-    }
 
     /*
     Sends a query to ES
     @param The query you want to ask ES
     @return the search responnse from ES
     */
-    private void getResponse(String query){
-        //TODO
-    }
-
-    /*
-    Returns the answers from an ES query
-    @return all answers from ES
-    */
-    public String getAllAnswers(){
-        //TODO
-        return null;
-    }
 
     /*
     Returns the first answers
     @param a response from ES
     @return a single answer
     */
-    public String getAnswer(String param){
-         //TODO
-      return "Hello ES!"; 
+    public String getAnswer(String query){
+      try{
+        SearchHit firstHit = getStringQuery(query).getHits().getAt(0);
+        return getAllAnswers(firstHit).get(0);
+      }catch(ArrayIndexOutOfBoundsException e){
+        return ("I don't know anything about that.");
     }
 
+    }
 
 }
