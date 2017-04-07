@@ -23,32 +23,26 @@ import java.io.*;
 public class EsModel{
 
     TransportClient client;
-
-
-
-    public EsModel() throws UnknownHostException{
-      client = new PreBuiltTransportClient(Settings.EMPTY)
-        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
-    }
-
-
-
-    public SearchResponse getStringQuery(String query){
-      SearchResponse response = client.prepareSearch("familjelivdb")
-        .setQuery(QueryBuilders.matchQuery("question",query))
-        .setFrom(0).setSize(60).setExplain(true)
-        .get();
-      return response;
-    }
-
-
-    public ArrayList<String> getAllAnswers(SearchHit hit){
-      return (ArrayList<String>)hit.sourceAsMap().get("answers");
-    }
+    int answerIndex;
+    int fromSize;
+    int toSize;
+    SearchResponse currentSearchResponse;
 
     /*
     This model talks to elasticsearch
+    The answerIndex variable is used to fetch a certain answer from the results from elasticsearch.
+    fromSize and toSize is what delimits what range of results are fetched from elasticsearch.
+    TODO Currently if an entire thread is over the message max length the answerIndex will grow to large.
+    In later implementation we will have to increase the range when the answerIndex hits fromSize.
     */
+    public EsModel() throws UnknownHostException{
+      client = new PreBuiltTransportClient(Settings.EMPTY)
+        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+      answerIndex = 0;
+      fromSize = 0;
+      toSize = 60;
+    }
+
 
 
     /*
@@ -56,16 +50,38 @@ public class EsModel{
     @param The query you want to ask ES
     @return the search responnse from ES
     */
+    public SearchResponse getStringQuery(String query){
+      SearchResponse response = client.prepareSearch("familjelivdb")
+        .setQuery(QueryBuilders.matchQuery("question",query))
+        .setFrom(fromSize).setSize(toSize).setExplain(true)
+        .get();
+      return response;
+    }
+
+    /**
+    @param search hit from Elasticsearch
+    @return All answers from the hit as ArrayList.
+    */
+    public ArrayList<String> getAllAnswers(SearchHit hit){
+      return (ArrayList<String>)hit.sourceAsMap().get("answers");
+    }
+
+    /**
+    resets index for answer iteration
+    */
+    public void resetIndex(){
+    answerIndex = 0;
+    }
 
     /*
     Returns the first answers
     @param a response from ES
     @return a single answer
     */
-    public String getAnswer(String query){
+    public String getNextAnswer(String query){
       try{
         SearchHit firstHit = getStringQuery(query).getHits().getAt(0);
-        return getAllAnswers(firstHit).get(0);
+        return getAllAnswers(firstHit).get(answerIndex++);
       }catch(ArrayIndexOutOfBoundsException e){
         return ("I don't know anything about that.");
     }

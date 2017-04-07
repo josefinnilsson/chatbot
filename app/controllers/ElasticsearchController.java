@@ -18,14 +18,15 @@ This controller talks with the Elasticsearch model.
 public class ElasticsearchController extends Controller {
 
     EsModel esModel;
+    int messageLengthLimit;
 
-
-
+  //Possibly move the length limit to the model? TODO
   public ElasticsearchController(){
+    messageLengthLimit = 140;
     try{
       esModel = new EsModel();
     }
-    catch(Exception e){System.out.println("---------FAILLL--------");}
+    catch(Exception e){System.out.println("COULD NOT CONSTRUCT ESMODEL");}
   }
 
   /**
@@ -34,13 +35,15 @@ public class ElasticsearchController extends Controller {
   */
   public void Query(Message msg){
 
-    //Message to return
-    Message message = new Message();
     String queryString = msg.getName();
     //Get queryResult as string from ES-Model
-    String queryResult = esModel.getAnswer(queryString);
-    //String queryResult = esModel.getAnswer("");
-
+    String queryResult = esModel.getNextAnswer(queryString);
+    while(queryResult.length()>messageLengthLimit){
+      queryResult = esModel.getNextAnswer(queryString);
+    }
+    esModel.resetIndex();
+    //Message to return
+    Message message = new Message();
     //Set return-message text to query result
     message.setMessage(queryResult);
     //Save return-message for view
