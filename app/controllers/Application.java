@@ -22,6 +22,10 @@ public class Application extends Controller {
 		return ok(index.render("Index"));
 	}
 
+	public Result help() {
+		return ok(help.render("Help"));
+	}
+
 	public Result addMessage() {
 		Form<Message> messageForm = formFactory.form(Message.class);
 		Message message = messageForm.bindFromRequest().get();
