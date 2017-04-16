@@ -173,3 +173,27 @@ form {
       background: $hover;
     }
   }
+
+  .back {
+  position: fixed;
+  bottom: 90%;
+  right: 80%;
+  width: 10%;
+}
+
+  .back-button {
+    border: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+  input[type="submit"] {
+    background: $primary-color-light;
+    color: white;
+    font-size: 16px;
+    text-transform: none;
+    width: 30%;
+    &:hover {
+      background: $hover;
+    }
+  }
