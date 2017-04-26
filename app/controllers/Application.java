@@ -40,4 +40,10 @@ public class Application extends Controller {
 		List<Message> messages = finder.all();
 		return ok(toJson(messages));
 	}
+
+	public Result getAnswers() {
+		Model.Finder<Integer, Answer> answerFinder = new Model.Finder<>(Answer.class); 
+		List<Answer> answers = answerFinder.all(); 
+		return ok(toJson(answers)); 
+	}
 }
