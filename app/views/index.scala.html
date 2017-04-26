@@ -6,8 +6,8 @@
 	<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
 	<link href='https://fonts.googleapis.com/css?family=Raleway:300,300italic,500' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
-	  <script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-	 <script src="@routes.Assets.versioned("javascripts/main.js")"type="text/javascript"></script>
+	<script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	<script src="@routes.Assets.versioned("javascripts/main.js")"type="text/javascript"></script>
 
 </head>
 
@@ -16,7 +16,7 @@
 		<div class="typewriter">
 			<h1>Hello, my name is Dolores</h1>
 		</div>
-			<ul id="messages"></ul>
+		<ul id="messages"></ul>
 		<div class="form">
 			<form action="@routes.Application.addMessage()" method="post">
 				<label><span>Send Dolores a Message</span>
@@ -26,16 +26,23 @@
 						<input type="submit" value="Send">
 					</fieldset>
 				</form>
-		</div>
-		<div class="help">
-		<form method="get" action="/help">
-			<fieldset class ="help-button">
-				<input type="submit" value="?">
-			</fieldset>
-    		
-		</form>
-		</div>
-</body>
-<footer><small>Copyright &copy; 2017 Los Knackos Locos</small></footer>
+			</div>
+			<div class="like"> 
+				<form action="@routes.Application.likeAnswer()" method="post">
+					<fieldset class="submit">
+						<input type="submit" value="Like"> 
+					</fieldset>
+				</form>
+			</div>
+			<div class="help">
+				<form method="get" action="/help">
+					<fieldset class ="help-button">
+						<input type="submit" value="?">
+					</fieldset>
+					
+				</form>
+			</div>
+		</body>
+		<footer><small>Copyright &copy; 2017 Los Knackos Locos</small></footer>
 
-</html>
+		</html>

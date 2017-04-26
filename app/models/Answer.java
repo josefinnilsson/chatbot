@@ -41,4 +41,8 @@ public class Answer extends Model {
 	public void setMessage(Message message) {
 		this.message = message; 
 	}
+
+	public void like() {
+		positiveRating = true; 
+	}
 }

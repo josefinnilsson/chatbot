@@ -46,4 +46,19 @@ public class Application extends Controller {
 		List<Answer> answers = answerFinder.all(); 
 		return ok(toJson(answers)); 
 	}
+
+	public Answer getLast() {
+		Model.Finder<Integer, Answer> answerFinder = new Model.Finder<>(Answer.class); 
+		List<Answer> answers = answerFinder.all(); 
+		int lastIndex = answers.size()-1; 
+		Answer last = answers.get(lastIndex); 
+		return last; 
+	}
+
+	public Result likeAnswer() { 
+		Answer answer = getLast(); 
+		answer.like();
+		return ok(toJson(answer)); 
+	}
+
 }
