@@ -198,13 +198,14 @@ form {
   }
 
   input#help-button {
-    background: $primary-color-light;
-    color: white;
-    font-size: 18px;
+    background: transparent url(../images/Help-100.png) no-repeat;
+    background-size: cover;
+    border: none;
+    height: 23px;
+    width: 23px;
     text-transform: uppercase;
-    width: 1.5em;
     &:hover {
-      background: $hover;
+      opacity: 0.5;
     }
   }
 
