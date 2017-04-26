@@ -1,4 +1,4 @@
-@(url: String)
+ @(url: String)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,24 +13,21 @@
 
 <body>
 	<div class="container">
-		<div class="typewriter">
-			<h1>Hello, my name is Dolores</h1>
-		</div>
-			<ul id="messages"></ul>
+		<h1>Chatbot Dolores</h1>
+		<ul id="messages"></ul>
 		<div class="form">
 			<form action="@routes.Application.addMessage()" method="post">
-				<label><span>Send Dolores a Message</span>
-					<textarea name="name"></textarea>
-
+				<label><span>Chat</span>
+					<textarea name="name" placeholder="Send Dolores a message..."></textarea>
 					<fieldset class="submit">
-						<input type="submit" value="Send">
+						<input type="submit" value="" id="submit-button">
 					</fieldset>
 				</form>
 		</div>
 		<div class="help">
 		<form method="get" action="/help">
 			<fieldset class ="help-button">
-				<input type="submit" value="?">
+				<input type="submit" value="?" id="help-button">
 			</fieldset>
     		
 		</form>
