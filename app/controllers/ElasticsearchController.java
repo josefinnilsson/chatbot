@@ -43,10 +43,15 @@ public class ElasticsearchController extends Controller {
     }
     esModel.resetIndex();
     //Message to return
-    Message message = new Message();
-    //Set return-message text to query result
-    message.setMessage(queryResult);
-    //Save return-message for view
-    message.save();
+    // Message message = new Message();
+    // //Set return-message text to query result
+    // message.setMessage(queryResult);
+    // //Save return-message for view
+    // message.save();
+
+    Answer answer = new Answer(); 
+    answer.setAnswer(queryResult); 
+    answer.setMessage(msg); 
+    answer.save(); 
   }
 }
