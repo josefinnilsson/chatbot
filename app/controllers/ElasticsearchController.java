@@ -22,7 +22,7 @@ public class ElasticsearchController extends Controller {
 
   //Possibly move the length limit to the model? TODO
   public ElasticsearchController(){
-    messageLengthLimit = 140;
+    messageLengthLimit = 255;
     try{
       esModel = new EsModel();
     }
@@ -37,21 +37,11 @@ public class ElasticsearchController extends Controller {
 
     String queryString = msg.getName();
     //Get queryResult as string from ES-Model
-    String queryResult = esModel.getNextAnswer(queryString);
-    while(queryResult.length()>messageLengthLimit){
-      queryResult = esModel.getNextAnswer(queryString);
-    }
-    esModel.resetIndex();
-    //Message to return
-    // Message message = new Message();
-    // //Set return-message text to query result
-    // message.setMessage(queryResult);
-    // //Save return-message for view
-    // message.save();
+    String queryResult = esModel.getAnswer(queryString, messageLengthLimit);
 
-    Answer answer = new Answer(); 
-    answer.setAnswer(queryResult); 
-    answer.setMessage(msg); 
-    answer.save(); 
+    Answer answer = new Answer();
+    answer.setAnswer(queryResult);
+    answer.setMessage(msg);
+    answer.save();
   }
 }
