@@ -52,7 +52,7 @@ public class EsModel{
     */
     public SearchResponse getStringQuery(String query){
       SearchResponse response = client.prepareSearch("familjelivdb")
-        .setQuery(QueryBuilders.matchQuery("question",query))
+      	.setQuery(QueryBuilders.multiMatchQuery(query,"answers","question"))
         .setFrom(fromSize).setSize(toSize).setExplain(true)
         .get();
       return response;
