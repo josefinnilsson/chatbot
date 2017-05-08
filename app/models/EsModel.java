@@ -30,20 +30,14 @@ public class EsModel{
 
     /*
     This model talks to elasticsearch
-    The answerIndex variable is used to fetch a certain answer from the results from elasticsearch.
-    fromSize and toSize is what delimits what range of results are fetched from elasticsearch.
-    TODO Currently if an entire thread is over the message max length the answerIndex will grow to large.
-    In later implementation we will have to increase the range when the answerIndex hits fromSize.
+    It fetches search hits from fromSize to toSize
     */
     public EsModel() throws UnknownHostException{
       client = new PreBuiltTransportClient(Settings.EMPTY)
         .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
-      answerIndex = 0;
       fromSize = 0;
       toSize = 60;
     }
-
-
 
     /*
     Sends a query to ES
@@ -65,27 +59,21 @@ public class EsModel{
     public ArrayList<String> getAllAnswers(SearchHit hit){
       return (ArrayList<String>)hit.sourceAsMap().get("answers");
     }
-
-    /**
-    resets index for answer iteration
-    */
-    public void resetIndex(){
-    answerIndex = 0;
-    }
-
     /*
-    Returns the first answers
+    Iterates over all hits and all their threds until it finds a suitable answer.
+    Right now suitable means shorter than "maxLength"
     @param a response from ES
     @return a single answer
     */
-    public String getNextAnswer(String query){
-      try{
-        SearchHit firstHit = getStringQuery(query).getHits().getAt(0);
-        return getAllAnswers(firstHit).get(answerIndex++);
-      }catch(ArrayIndexOutOfBoundsException e){
-        return ("I don't know anything about that.");
-    }
+    public String getAnswer(String query, int maxLength){
+      for(SearchHit thread : getStringQuery(query).getHits()){
+        ArrayList<String> threadResponses = (ArrayList<String>)thread.sourceAsMap().get("answers");
+        for(String answer : threadResponses){
+          if(answer.length()<maxLength)
+            return answer;
+        }
+      }
 
+      return ("I don't know anything about that.");
     }
-
 }
