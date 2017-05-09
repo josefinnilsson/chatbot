@@ -58,6 +58,7 @@ public class Application extends Controller {
 	public Result likeAnswer() { 
 		Answer answer = getLast(); 
 		answer.like();
+		answer.save();
 		return ok(toJson(answer)); 
 	}
 
