@@ -23,7 +23,7 @@ import java.io.*;
 
 public class EsModel{
 
-    ArrayList<String> standardsvar;
+    ArrayList<String> standardResponses;
     Random rand;
 
     TransportClient client;
@@ -84,14 +84,14 @@ public class EsModel{
 
     private void populateStandardResponses(){
       rand = new Random();
-      standardsvar = new ArrayList<String>();
-      standardsvar.add("I don't know anything about that.");
-      standardsvar.add("Doesn't look like anything to me");
-      standardsvar.add("The maze wasn't meant for you.");
-      standardsvar.add("These violent delights have violent ends.");
+      standardResponses = new ArrayList<String>();
+      standardResponses.add("I don't know anything about that.");
+      standardResponses.add("Doesn't look like anything to me");
+      standardResponses.add("The maze wasn't meant for you.");
+      standardResponses.add("These violent delights have violent ends.");
     }
 
     private String getRandomResponse(){
-      return standardsvar.get(rand.nextInt(standardsvar.size()));
+      return standardResponses.get(rand.nextInt(standardResponses.size()));
     }
 }
