@@ -20,6 +20,7 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+
 public class EsModel{
 
     TransportClient client;

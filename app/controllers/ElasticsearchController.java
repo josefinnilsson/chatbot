@@ -16,7 +16,7 @@ import play.data.DynamicForm;
 This controller talks with the Elasticsearch model.
 */
 public class ElasticsearchController extends Controller {
-
+    StaticMessage statMsg;
     EsModel esModel;
     int messageLengthLimit;
 
@@ -25,8 +25,14 @@ public class ElasticsearchController extends Controller {
     messageLengthLimit = 255;
     try{
       esModel = new EsModel();
+    }catch(Exception e){
+      System.out.println("COULD NOT CONSTRUCT ESMODEL");
     }
-    catch(Exception e){System.out.println("COULD NOT CONSTRUCT ESMODEL");}
+    try{
+      statMsg = new StaticMessage();
+    }catch(Exception e){
+      System.out.println("COULD NOT CONSTRUCT STATICMESSAGE");
+    }
   }
 
   /**
@@ -37,8 +43,11 @@ public class ElasticsearchController extends Controller {
 
     String queryString = msg.getName();
     //Get queryResult as string from ES-Model
-    String queryResult = esModel.getAnswer(queryString, messageLengthLimit);
-
+    String queryResult;
+    queryResult = statMsg.getStaticMessage(queryString);
+    if(queryResult == null){
+      queryResult = esModel.getAnswer(queryString, messageLengthLimit);
+    }
     Answer answer = new Answer();
     answer.setAnswer(queryResult);
     answer.setMessage(msg);
