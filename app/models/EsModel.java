@@ -23,6 +23,9 @@ import java.io.*;
 
 public class EsModel{
 
+    ArrayList<String> standardsvar;
+    Random rand;
+
     TransportClient client;
     int answerIndex;
     int fromSize;
@@ -34,6 +37,7 @@ public class EsModel{
     It fetches search hits from fromSize to toSize
     */
     public EsModel() throws UnknownHostException{
+      populateStandardResponses();
       client = new PreBuiltTransportClient(Settings.EMPTY)
         .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
       fromSize = 0;
@@ -75,6 +79,19 @@ public class EsModel{
         }
       }
 
-      return ("I don't know anything about that.");
+      return getRandomResponse();
+    }
+
+    private void populateStandardResponses(){
+      rand = new Random();
+      standardsvar = new ArrayList<String>();
+      standardsvar.add("I don't know anything about that.");
+      standardsvar.add("Doesn't look like anything to me");
+      standardsvar.add("The maze wasn't meant for you.");
+      standardsvar.add("These violent delights have violent ends.");
+    }
+
+    private String getRandomResponse(){
+      return standardsvar.get(rand.nextInt(standardsvar.size()));
     }
 }
