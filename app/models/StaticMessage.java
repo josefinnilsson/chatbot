@@ -5,31 +5,55 @@ import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/*
+This models handles , nearly, all static responses from dolores
+*/
 public class StaticMessage{
+  //Contains all static answers with the question as key
   HashMap<String,String> messages;
   public StaticMessage(){
     populate();
   }
 
+  /*
+  Returs the static response
+  @param the question
+  @the static response or null if there is none
+  */
   public String getStaticMessage(String query){
+    //All keys should be lowercase with no initial or trailing whitespaces
     query = query.toLowerCase().trim();
-    if(handleSpecCommads(query) != null)
+    //If is a logic-requiring question
+    if(handleSpecCommads(query) != null){
       return handleSpecCommads(query);
+    }
+    //If it is not a logic-requiring question
     return messages.get(query);
   }
 
+  /*
+  Handles logic-requiring questions
+  @param questions
+  @return the semi-static answer
+  */
   public String handleSpecCommads(String query){
     if(query.equals("vad är klockan?")||query.equals("hur mycket är klockan?"))
       return returnTimeStamp();
     return null;
   }
 
+  /*
+  @return the time in format HH:mm
+  */
   public String returnTimeStamp(){
     Calendar cal = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     return sdf.format(cal.getTime());
   }
 
+  /*
+  populates the HashMap with static responses
+  */
   private void populate(){
     messages = new HashMap<String,String>();
     messages.put("hej!","Hej!");

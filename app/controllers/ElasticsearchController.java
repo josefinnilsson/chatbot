@@ -42,9 +42,10 @@ public class ElasticsearchController extends Controller {
   public void Query(Message msg){
 
     String queryString = msg.getName();
-    //Get queryResult as string from ES-Model
     String queryResult;
+    //Get static response
     queryResult = statMsg.getStaticMessage(queryString);
+    //Get queryResult as string from ES-Model if static response is null
     if(queryResult == null){
       queryResult = esModel.getAnswer(queryString, messageLengthLimit);
     }
