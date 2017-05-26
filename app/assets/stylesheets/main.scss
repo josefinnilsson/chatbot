@@ -46,8 +46,11 @@ body {
   }
 
   ul {
-    padding-left: none;
-    padding-right: none;
+    height:26em !important;
+  }
+
+  .like {
+    position-left: 87%;
   }
 }
 
@@ -58,21 +61,21 @@ p {
 }
 
 ul {
-  width: 85%;
+  width: 95%;
   padding-left: 3%;
   padding-right: 3%;
   list-style-type: none; 
+  overflow: scroll;
+  height: 19.5em;
 }
 
 li {
   padding-top:7%;
-  width: 100%;
+  width: 87%;
   text-align: left;
   font-family: $body-font; 
   font-size: 1em; 
   color: $heading-color-dark; 
-  overflow: scroll;
-  overflow-x: hidden;
 }
 
 li:nth-child(odd) {
@@ -261,7 +264,7 @@ form {
   }
 
 .like {
-  padding-right: 1.5em;
+  padding-right: 1em;
 }
   .like-button {
     border: none;
