@@ -18,9 +18,9 @@
 
 		<ul id="messages"></ul>
 		<div class="form">
-			<form action="@routes.Application.addMessage()" method="post">
+			<form action="@routes.Application.addMessage()" method="post" id="form">
 				<label><span>Chat</span>
-					<textarea name="name" placeholder="Send Dolores a message..."></textarea>
+					<textarea name="name" placeholder="Send Dolores a message..." id = "textarea"></textarea>
 					<fieldset class="submit">
 						<input type="submit" value="" id="submit-button">
 					</fieldset>

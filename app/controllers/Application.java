@@ -58,7 +58,7 @@ public class Application extends Controller {
 	public Result likeAnswer() { 
 		Answer answer = getLast(); 
 		answer.like();
-		return ok(toJson(answer)); 
+		return redirect(routes.Application.index()); 
 	}
 
 }

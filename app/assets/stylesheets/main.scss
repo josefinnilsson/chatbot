@@ -46,11 +46,14 @@ body {
   }
 
   ul {
-    height:26em !important;
+    display: inline-block;
+    height: 24em !important;
   }
 
   .like {
-    position-left: 87%;
+    position: fixed;
+    right: 28.1% !important;
+    padding: none;
   }
 }
 
@@ -61,12 +64,13 @@ p {
 }
 
 ul {
+  display: inline-block;
   width: 95%;
   padding-left: 3%;
   padding-right: 3%;
   list-style-type: none; 
   overflow: scroll;
-  height: 19.5em;
+  height: 18em;
 }
 
 li {
@@ -80,7 +84,7 @@ li {
 
 li:nth-child(odd) {
   text-align: right; 
-  padding-left: 10%;
+  padding-left: 12%;
 }
 
 footer {
@@ -264,6 +268,8 @@ form {
   }
 
 .like {
+  position: fixed;
+  right: 0.5em;
   padding-right: 1em;
 }
   .like-button {
