@@ -59,7 +59,7 @@ public class Application extends Controller {
 		Answer answer = getLast(); 
 		answer.like();
 		answer.save();
-		return ok(toJson(answer)); 
+		return redirect(routes.Application.index()); 
 	}
 
 }
