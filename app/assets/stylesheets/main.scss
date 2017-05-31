@@ -28,6 +28,10 @@ body {
   max-width: 100%;
 }
 
+.container {
+  width: 100% !important;
+}
+
 @media screen and (min-width: 376px) {
   body {
     margin: 0 auto;
@@ -74,7 +78,7 @@ ul {
 }
 
 li {
-  padding-bottom: 5%;
+  padding-top: 5%;
   width: 87%;
   text-align: left;
   font-family: $body-font; 
@@ -83,8 +87,7 @@ li {
 }
 
 li:nth-child(odd) {
-  padding-top: 2%;
-  padding-bottom: none;
+  padding-top: 5%;
   text-align: right; 
   padding-left: 12%;
 }
