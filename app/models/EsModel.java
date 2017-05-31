@@ -20,7 +20,11 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+
 public class EsModel{
+
+    ArrayList<String> standardResponses;
+    Random rand;
 
     TransportClient client;
     int answerIndex;
@@ -33,6 +37,7 @@ public class EsModel{
     It fetches search hits from fromSize to toSize
     */
     public EsModel() throws UnknownHostException{
+      populateStandardResponses();
       client = new PreBuiltTransportClient(Settings.EMPTY)
         .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
       fromSize = 0;
@@ -74,6 +79,19 @@ public class EsModel{
         }
       }
 
-      return ("I don't know anything about that.");
+      return getRandomResponse();
+    }
+
+    private void populateStandardResponses(){
+      rand = new Random();
+      standardResponses = new ArrayList<String>();
+      standardResponses.add("I don't know anything about that.");
+      standardResponses.add("Doesn't look like anything to me");
+      standardResponses.add("The maze wasn't meant for you.");
+      standardResponses.add("These violent delights have violent ends.");
+    }
+
+    private String getRandomResponse(){
+      return standardResponses.get(rand.nextInt(standardResponses.size()));
     }
 }
