@@ -3,7 +3,7 @@ $ ->
 		$.each answers, (index, answer) ->
 			$('#messages').append $("<li>").text answer.message.name
 			$('#messages').append $("<li>").text answer.answer
-			$('#messages').scrollTop($('#messages')[0].scrollHeight)
+			$('ul').scrollTop($('ul')[0].scrollHeight)
 			$('#textarea').focus()
 
 $(document).keypress (event) ->
